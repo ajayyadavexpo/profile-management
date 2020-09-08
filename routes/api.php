@@ -22,12 +22,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('register-user', 'AuthController@register');
 Route::post('login-user', 'AuthController@login');
-Route::get('open', 'DataController@open');
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('user', 'AuthController@getAuthenticatedUser');
     Route::post('update-user', 'AuthController@update');
     Route::post('update-profile', 'AuthController@updateprofile');
-    Route::get('closed', 'DataController@closed');
 });
 
