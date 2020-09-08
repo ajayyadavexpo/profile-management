@@ -58,7 +58,7 @@
                                 <a class="dropdown-item" href="/home">
                                     {{ __('Profile') }}
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item logout" href="#">
                                     {{ __('Logout') }}
                                 </a>
                                 
@@ -84,6 +84,9 @@
             "Authorization": "Bearer " + localStorage.getItem('token')
         },
         success: function (data) {
+            if(data.status){
+                localStorage.removeItem('token');
+            }
             if(data.user){
                 // authenticated user
             }
@@ -91,6 +94,12 @@
         error: function (error) {
             console.log(error.responseJSON);
         }
+    });
+
+    $(".logout").on("click",function(){
+
+        localStorage.removeItem('token');
+        window.location = `{{ url('/')}}`; 
     });
 </script>
 
